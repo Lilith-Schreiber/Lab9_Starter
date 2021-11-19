@@ -95,6 +95,23 @@
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
+
+      try {
+      let result = Number(firstNum);
+      //result2 = isInteger(secondNum);
+      //console.log(typeof firstNum);
+      if (isNaN(result) === true) throw new Error("The input should be an integer!");
+    } catch(err) {
+      //result2 = True;
+      alert("The input should be an integer!");
+      if (err instanceof ReferenceError) {
+        alert("reference error!");
+      }
+      return;
+    } finally {
+      if (isNaN(Number(firstNum)) === false) console.log(eval(`${firstNum} ${operator} ${secondNum}`));
+    }
+
       output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
     });
 
@@ -107,8 +124,8 @@
       console.log("Console Log Demo");
     });
 
-    const err = document.getElementById("error");
-    err.addEventListener('click', function() {
+    const errors = document.getElementById("error");
+    errors.addEventListener('click', function() {
       console.error("Console Error Demo");
     });
 
