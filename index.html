@@ -96,21 +96,33 @@
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
 
-      try {
-      let result = Number(firstNum);
-      //result2 = isInteger(secondNum);
-      //console.log(typeof firstNum);
-      if (isNaN(result) === true) throw new Error("The input should be an integer!");
-    } catch(err) {
-      //result2 = True;
-      alert("The input should be an integer!");
-      if (err instanceof ReferenceError) {
-        alert("reference error!");
+      class NonNumberError extends Error {
+        constructor(message) {
+          super(message);
+          this.name = "The input should be an integer!";
+        }
       }
-      return;
-    } finally {
-      if (isNaN(Number(firstNum)) === false) console.log(eval(`${firstNum} ${operator} ${secondNum}`));
-    }
+      try {
+        let result = Number(firstNum);
+        if (isNaN(result) === true) {
+          throw new Error("The input should be an integer!");
+        }
+      } catch(err) {
+        alert("The input should be an integer!");
+        if (err instanceof ReferenceError) {
+          alert("reference error!");
+        }
+        return;
+      } finally {
+        if (isNaN(Number(firstNum)) === false) {
+          console.log(eval(`${firstNum} ${operator} ${secondNum}`));
+        }
+      }
+      try {
+        eval(`${secondNum}`);
+      } catch(err) {
+        throw new NonNumberError("The input should be an integer!");
+      }
 
       output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
     });
