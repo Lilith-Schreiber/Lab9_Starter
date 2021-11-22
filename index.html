@@ -174,13 +174,17 @@
     });
 
     const startgroup = document.getElementById("start");
+    const label = "Console Group Start Demo";
     startgroup.addEventListener('click', function() {
-      console.group("Console Group Start Demo");
+      console.group(label);
+      console.info('A');
+      console.info('B');
+      console.info('C');
     });
 
     const endgroup = document.getElementById("end");
     endgroup.addEventListener('click', function() {
-      console.log("Console Group End Demo");
+      console.groupEnd(label);
     });
 
     const tablelog = document.getElementById("table");
